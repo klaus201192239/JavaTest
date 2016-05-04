@@ -10,10 +10,8 @@ public class TestMain {
 		System.out.println("Test Start!!!");
 		
 		
-		
-		ExcelUtil excel=new ExcelUtil("F:/asad.xls");
+		ExcelUtil excel=new ExcelUtil("F:/gradeq.xls");
 		excel.printExcel();
-		
 		
 
 		System.out.println("Test End!!!");
