@@ -15,12 +15,11 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.klaus.bean.Course;
 import com.klaus.bean.forecastCourseBean;
-import com.klaus.http.MyHttpsClient;
+import com.klaus.mybatis.MyIbatis;
 import com.klaus.security.SecurityCoder;
-import com.wilddog.client.Wilddog;
+import com.klaus.utils.TimeUtil;
 
 public class ExcelUtil {
 
@@ -120,22 +119,21 @@ public class ExcelUtil {
 	    }
 	    
 	    
-	    List<Map<String,String>> listTem=new ArrayList<Map<String,String>>();
+	//    List<Map<String,String>> listTem=new ArrayList<Map<String,String>>();
 	    
 	    
-	    for(int i=0;i<10;i++){
+	    for(int i=0;i<listCourse.size();i++){
 	    	
 	    	forecastCourseBean bean=listCourse.get(i);
 	    	
-	    	System.out.println(bean.getCourseId()+"--"+bean.getCourseName()+"--"+bean.getCourseGrade());
+	    	Course course=new Course();
+	    	course.setId(TimeUtil.getObjectId());
+	    	course.setCourseId(bean.getCourseId());
+	    	course.setCourseName(bean.getCourseName());
+	    	course.setCourseGrade(Double.parseDouble(bean.getCourseGrade()));
 	    	
-	    	Map<String,String> tempMap=new HashMap<String,String>();
+	    //	MyIbatis.insert(course);
 	    	
-	    	tempMap.put("CourseId",bean.getCourseId() );
-	    	tempMap.put("CourseName",bean.getCourseName() );
-	    	tempMap.put("CourseGrade",bean.getCourseGrade() );
-	    	
-	    	listTem.add(tempMap);
 	    	
 	    	
 	    }
@@ -149,37 +147,6 @@ public class ExcelUtil {
 	    	
 	    }
 	    
-	  //  Wilddog ref = new Wilddog("https://wild-snake-96493.wilddogio.com/java/test");
-
-     //   ref.setValue("lstCourseGrade");
-	    
-	    try {
-	    	
-	    	ObjectMapper mapper = new ObjectMapper();  
-	          
-	        //User类转JSON  
-	        //输出结果：{"name":"小民","age":20,"birthday":844099200000,"email":"xiaomin@sina.com"}  
-	       // String json = mapper.writeValueAsString(user);  
-	      //  System.out.println(json);  
-	          
-	        //Java集合转JSON  
-	        //输出结果：[{"name":"小民","age":20,"birthday":844099200000,"email":"xiaomin@sina.com"}]  
-	      //  List<User> users = new ArrayList<User>();  
-	     //   users.add(user);  
-	        String jsonlist = mapper.writeValueAsString(listTem);  
-	    	
-	    	System.out.println(jsonlist);
-	        
-	        
-		MyHttpsClient.add("https://wild-snake-96493.wilddogio.com/java/courseinfo.json",jsonlist);
-		//MyHttpsClient.add("https://wild-snake-96493.wilddogio.com/java/coursegrade.json",jsonlist);
-		
-		
-		
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	  
 	}
 
