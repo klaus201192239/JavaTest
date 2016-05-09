@@ -12,9 +12,9 @@ public class TimeUtil {
 		
 		int thirdPart=(int)(Math.random()*100000);
 
-		System.out.println(firstPart);
+		//System.out.println(firstPart);
 		//System.out.println(secondPart);
-		System.out.println(thirdPart);
+		//System.out.println(thirdPart);
 		
 		return (firstPart+""+thirdPart).substring(0, 15);
 	}

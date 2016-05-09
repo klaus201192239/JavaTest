@@ -16,6 +16,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import com.klaus.bean.Course;
+import com.klaus.bean.StuCourse;
+import com.klaus.bean.Student;
 import com.klaus.bean.forecastCourseBean;
 import com.klaus.mybatis.MyIbatis;
 import com.klaus.security.SecurityCoder;
@@ -124,13 +126,13 @@ public class ExcelUtil {
 	    
 	    for(int i=0;i<listCourse.size();i++){
 	    	
-	    	forecastCourseBean bean=listCourse.get(i);
+	   // 	forecastCourseBean bean=listCourse.get(i);
 	    	
-	    	Course course=new Course();
-	    	course.setId(TimeUtil.getObjectId());
-	    	course.setCourseId(bean.getCourseId());
-	    	course.setCourseName(bean.getCourseName());
-	    	course.setCourseGrade(Double.parseDouble(bean.getCourseGrade()));
+	    //	Course course=new Course();
+	    //	course.setId(TimeUtil.getObjectId());
+	    //	course.setCourseId(bean.getCourseId());
+	    //	course.setCourseName(bean.getCourseName());
+	    //	course.setCourseGrade(Double.parseDouble(bean.getCourseGrade()));
 	    	
 	    //	MyIbatis.insert(course);
 	    	
@@ -143,12 +145,58 @@ public class ExcelUtil {
 	    	
 	    	Map<String,String> tempMap=listCourseGrade.get(i);
 	    	
-	        System.out.println(tempMap.size()+"-----"+ tempMap.toString());
+	     System.out.println(tempMap.get("StudentId"));
+	    	
+	    	String studentid=MyIbatis.getStudentId(tempMap.get("StudentId"));
+	    	
+	    	for (Map.Entry<String, String> entry : tempMap.entrySet()) {  
+	    		  
+	    	  //  System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue()); 
+	    	    
+	    	    String key= entry.getKey();
+	    	    
+	    	    if("StudentName".equals(key)||"StudentId".equals(key)||"StudentGrade".equals(key)){
+
+	    	    	
+	    	    	
+	    	    }else{
+	    	    	
+	    	    	System.out.println(studentid+"   "+MyIbatis.getCourseId(key)+"   "+entry.getValue());
+	    	    	
+	    	    	
+	    	    	StuCourse stuC=new StuCourse();
+	    	    	stuC.setCourseid(MyIbatis.getCourseId(key));
+	    	    	stuC.setId(TimeUtil.getObjectId());
+	    	    	stuC.setScore(entry.getValue());
+	    	    	stuC.setStuid(studentid);
+	    	    	
+	    	    	MyIbatis.insertStudentCourse(stuC);
+	    	    	
+	    	    	
+	    	    }
+	    	  
+	    	}  
+	    	
+	    	
+	       // System.out.println(tempMap.size()+"-----"+ tempMap.toString());
+	        
+	        
+//	        Student student=new Student();
+
+//	        student.setName(tempMap.get("StudentName"));
+//	        student.setStuId(tempMap.get("StudentId"));
+//	        student.setId(TimeUtil.getObjectId());
+//        student.setGrade(Integer.parseInt(tempMap.get("StudentGrade").substring(0, 5).replace(".","")));
+	       
+//	        MyIbatis.insertStudent(student);
+	        
+//	        System.out.println(student.getName()+"-----"+ student.getStuId()+"-----"+student.getGrade());
 	    	
 	    }
 	    
 	  
 	}
+	
 
 	private String getCellValues(int cellType, Cell cell) {
 
@@ -275,6 +323,7 @@ public class ExcelUtil {
 				//System.out.println(str);
 				
 	        	map.put("StudentId",str);
+	        	map.put("StudentGrade",cellValue);
 
 	        }
 			
@@ -297,7 +346,7 @@ public class ExcelUtil {
 					
 				}
 
-	        	if(map.size()==(listCourse.size()+2)){
+	        	if(map.size()==(listCourse.size()+3)){
 	        		
 	        		listCourseGrade.add(map);
 

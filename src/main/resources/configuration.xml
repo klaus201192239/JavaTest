@@ -13,7 +13,11 @@
 			</dataSource>
 		</environment>
 	</environments>
+	
 	<mappers>
-		<mapper class="com.klaus.myinterface.CourseService" />
+		<mapper class="com.klaus.myinterface.CourseService"  />
+		<mapper class="com.klaus.myinterface.StudentService"/>
+		<mapper class="com.klaus.myinterface.StuCourseService"/>
 	</mappers>
+	
 </configuration>  
