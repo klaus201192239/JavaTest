@@ -1,26 +1,40 @@
 package com.klaus.main;
 
-import java.io.IOException;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import com.klaus.http.MyHttpClient;
 
-import com.klaus.office.ExcelUtil;
-import com.klaus.utils.TimeUtil;
 
 public class TestMain {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 
 		System.out.println("Test Start!!!");
+		
+		
+		/* File ff= new File("F:/as.txt");
+		HttpPostUtil u = new HttpPostUtil("http://localhost:8080/empforecast/api/rest/uploadfile");*/
 
-		 ExcelUtil excel=new ExcelUtil("F:/grade.xls");
-		 excel.printExcel();
-
-
-		System.out.println(TimeUtil.getObjectId());
-
+		JSONArray array=new JSONArray();
+		
+		
+		for(int i=0;i<5;i++){
+			
+			JSONObject json=new JSONObject();
+			
+			json.put(i+"s", i+"e"+i);
+			
+			array.put(json);
+			
+		}
+		
+		MyHttpClient.sendJSONPost("http://localhost:8080/empforecast/api/rest/ability/addindex", array.toString());
+		
+		
+		
 		System.out.println("Test End!!!");
 
 	}
-
 
 }

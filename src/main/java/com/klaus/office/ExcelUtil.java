@@ -155,7 +155,7 @@ public class ExcelUtil {
 	    	    
 	    	    String key= entry.getKey();
 	    	    
-	    	    if("StudentName".equals(key)||"StudentId".equals(key)||"StudentGrade".equals(key)){
+	    	    if("StudentName".equals(key)||"StudentId".equals(key)||"StudentGrade".equals(key)||"-".equals(entry.getValue())){
 
 	    	    	
 	    	    	
