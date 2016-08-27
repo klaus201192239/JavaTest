@@ -1,4 +1,4 @@
-package com.klaus.main;
+package com.klaus.urp;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,118 +22,33 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-public class TestMain {
+public class ScoreDut {
+
 	
-	
-	//JSESSIONID=e05669a88a8a21ad60f8f4304663
-	//LT_portal.dlut.edu.cn_-237570-3Q0Ckbl5HAuDEIG6YvQm
-	//JSESSIONID=e07b8e94f95ea2292b78e511e60e
 	
 	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
-
-		System.out.println("Test Start!!!");		
-
-		
-		// getScoreHtml();
-		
-		//getnews() ;
 		
 		
-		// send();
-		 
-		 getCASeHtml();
-
-		System.out.println("Test End!!!");
-
+		//getLoginHtml();
+		
+		//getInnerCookie();		
+		
+		//postLogin() ;
+		
+		//CAS();
+		
+		//GetMain();
+		
+		//getScoreCookie();
+		
+		postScore();
+		
 	}
 	
 	
-	
-	private static String getCASeHtml() throws Exception {
-
-		String result = "";
-
-		CloseableHttpClient httpClient = HttpClients.createDefault();
-
-		HttpGet httpGet = new HttpGet("http://portal.dlut.edu.cn/cas.jsp?ticket=ST_portal.dlut.edu.cn_-16274-qssQwJfnVmvT5fhN0HBO");
-
-		httpGet.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-
-		httpGet.setHeader("Accept-Encoding", "gzip, deflate, sdch");
-
-		httpGet.setHeader("Accept-Language", "zh-CN,zh;q=0.8");
-
-		httpGet.setHeader("Connection", "keep-alive");
-
-		httpGet.setHeader("Cookie","JSESSIONID=23b99b0c38110848b28d74041a8a");
-
-		httpGet.setHeader("Host", "portal.dlut.edu.cn");
-
-		httpGet.setHeader("Referer", "http://portal.dlut.edu.cn/cas/login");
-
-		httpGet.setHeader("User-Agent",
-				"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.154 Safari/537.36 LBBROWSER");
-
-		HttpResponse response = null;
-
-		try {
-
-			response = httpClient.execute(httpGet);
-
-		} catch (ClientProtocolException e) {
-
-			e.printStackTrace();
-
-		} catch (IOException e) {
-
-			e.printStackTrace();
-
-		}
-
-		if (response != null) {
-			
-			
-			
-			
-			Header headers[] = response.getAllHeaders();
-
-			int i = 0;
-
-			while (i < headers.length) {
-
-				
-				
-				System.out.println(headers[i].getName()+"  "+headers[i].getValue());
-
-				i++;
-				
-			}
-			
-			
-
-			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-
-				result = EntityUtils.toString(response.getEntity());
-				
-				
-				
-				System.out.println(result);
-
-
-			}
-		}
-
-		httpClient.close();
-
-		return result;
-
-	}
-	
-	
-	
-	private static String getScoreHtml() throws Exception {
-
+	private static String getLoginHtml() throws Exception{
+		
+		
 		String result = "";
 
 		CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -209,11 +124,15 @@ public class TestMain {
 		httpClient.close();
 
 		return result;
-
+		
+		
 	}
 	
-	private static String getnews() throws Exception {
-
+	
+	
+	private static String getInnerCookie() throws Exception{
+		
+		
 		String result = "";
 
 		CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -290,17 +209,14 @@ public class TestMain {
 
 		return result;
 
+		
+		
 	}
 	
 	
 	
 	
-	private static void send() throws Exception {
-
-		//String body = "";
-		
-		
-		
+	private static void postLogin() throws Exception{
 		
 		String url = "http://portal.dlut.edu.cn/cas/login";
 		Map<String, String> map = new HashMap<String, String>();
@@ -308,11 +224,11 @@ public class TestMain {
 		map.put("service", "http://portal.dlut.edu.cn/cas.jsp");
 		map.put("serviceName", "null");
 		map.put("action", "DCPLogin");
-		map.put("inputname", "31517035");
+		map.put("inputname", "201293095");
 		map.put("selmail", "1");
-		map.put("username", "31517035");
-		map.put("password", "553355");
-		map.put("lt", "LT_portal.dlut.edu.cn_-16169-c75AMcZy5kj5dmpcT3lo");
+		map.put("username", "201293095");
+		map.put("password", "ssdut230426hll");
+		map.put("lt", "LT_portal.dlut.edu.cn_-67416-XjGiLfqg7EladDjjkoNP");
 		map.put("userNameType", "cardID");
 		
 		
@@ -346,7 +262,7 @@ public class TestMain {
 		httpPost.setHeader("Connection", "keep-alive");
 		// httpPost.setHeader("Content-Length", "306");
 		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-		httpPost.setHeader("Cookie", "JSESSIONID=23b97d0b6123cedd8ba62eca58cd; bdacookies=31517035; selcookies=1; JSESSIONID=23b99b0c38110848b28d74041a8a");
+		httpPost.setHeader("Cookie", "JSESSIONID=4014e527fc107f50faf8ab926ec6; bdacookies=201293095; selcookies=1; JSESSIONID=4014ed70e2b9ef0c4f0eca5e0770");
 		httpPost.setHeader("Host", "portal.dlut.edu.cn");
 		httpPost.setHeader("Origin", "http://portal.dlut.edu.cn");
 		httpPost.setHeader("Referer", "http://portal.dlut.edu.cn/cas/login");
@@ -386,14 +302,261 @@ public class TestMain {
 		response.close();
 		response.close();
 		
-		//return body;
 	}
 	
 	
-	private static void sendll() throws Exception {
-
-		//String body = "";
+	
+	private static void CAS()throws Exception{
 		
+		
+		String result = "";
+
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+
+		HttpGet httpGet = new HttpGet("http://portal.dlut.edu.cn/cas.jsp?ticket=ST_portal.dlut.edu.cn_-67546-fEdbnGmzaSoLCSOoSIiB");
+
+		httpGet.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+
+		httpGet.setHeader("Accept-Encoding", "gzip, deflate, sdch");
+
+		httpGet.setHeader("Accept-Language", "zh-CN,zh;q=0.8");
+
+		httpGet.setHeader("Connection", "keep-alive");
+
+		httpGet.setHeader("Cookie","JSESSIONID=4014ed70e2b9ef0c4f0eca5e0770");
+
+		httpGet.setHeader("Host", "portal.dlut.edu.cn");
+
+		httpGet.setHeader("Referer", "http://portal.dlut.edu.cn/cas/login");
+
+		httpGet.setHeader("User-Agent",
+				"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.154 Safari/537.36 LBBROWSER");
+
+		HttpResponse response = null;
+
+		try {
+
+			response = httpClient.execute(httpGet);
+
+		} catch (ClientProtocolException e) {
+
+			e.printStackTrace();
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		}
+
+		if (response != null) {
+			
+			
+			
+			
+			Header headers[] = response.getAllHeaders();
+
+			int i = 0;
+
+			while (i < headers.length) {
+
+				
+				
+				System.out.println(headers[i].getName()+"  "+headers[i].getValue());
+
+				i++;
+				
+			}
+			
+			
+
+			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+
+				result = EntityUtils.toString(response.getEntity());
+				
+				
+				
+				System.out.println(result);
+
+
+			}
+		}
+
+		httpClient.close();
+		
+	}
+	
+	
+	
+	
+	private static void GetMain()throws Exception{
+		
+		
+		String result = "";
+
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+
+		HttpGet httpGet = new HttpGet("http://portal.dlut.edu.cn/");
+
+		httpGet.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+
+		httpGet.setHeader("Accept-Encoding", "gzip, deflate, sdch");
+
+		httpGet.setHeader("Accept-Language", "zh-CN,zh;q=0.8");
+
+		httpGet.setHeader("Connection", "keep-alive");
+
+		httpGet.setHeader("Cookie","JSESSIONID=4014ed70e2b9ef0c4f0eca5e0770");
+
+		httpGet.setHeader("Host", "portal.dlut.edu.cn");
+
+		httpGet.setHeader("Referer", "http://portal.dlut.edu.cn/cas/login");
+
+		httpGet.setHeader("User-Agent",
+				"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.154 Safari/537.36 LBBROWSER");
+
+		HttpResponse response = null;
+
+		try {
+
+			response = httpClient.execute(httpGet);
+
+		} catch (ClientProtocolException e) {
+
+			e.printStackTrace();
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		}
+
+		if (response != null) {
+			
+			
+			
+			
+			Header headers[] = response.getAllHeaders();
+
+			int i = 0;
+
+			while (i < headers.length) {
+
+				
+				
+				System.out.println(headers[i].getName()+"  "+headers[i].getValue());
+
+				i++;
+				
+			}
+			
+			
+
+			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+
+				result = EntityUtils.toString(response.getEntity());
+				
+				
+				
+				System.out.println(result);
+
+
+			}
+		}
+
+		httpClient.close();
+		
+	}
+	
+	
+	
+	
+	
+	private static void getScoreCookie()throws Exception{
+		
+		
+		String result = "";
+
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+
+		HttpGet httpGet = new HttpGet("http://portal.dlut.edu.cn/report/Report-PortalAction.do?reportId=1568cf4c-856b-45fe-880e-46a31b84c68d&ctype=1");
+
+		httpGet.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+
+		httpGet.setHeader("Accept-Encoding", "gzip, deflate, sdch");
+
+		httpGet.setHeader("Accept-Language", "zh-CN,zh;q=0.8");
+
+		httpGet.setHeader("Connection", "keep-alive");
+
+		httpGet.setHeader("Cookie","JSESSIONID=4014ed70e2b9ef0c4f0eca5e0770");
+
+		httpGet.setHeader("Host", "portal.dlut.edu.cn");
+
+		httpGet.setHeader("Referer", "http://portal.dlut.edu.cn/");
+
+		httpGet.setHeader("User-Agent",
+				"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.154 Safari/537.36 LBBROWSER");
+
+		HttpResponse response = null;
+
+		try {
+
+			response = httpClient.execute(httpGet);
+
+		} catch (ClientProtocolException e) {
+
+			e.printStackTrace();
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		}
+
+		if (response != null) {
+			
+			
+			
+			
+			Header headers[] = response.getAllHeaders();
+
+			int i = 0;
+
+			while (i < headers.length) {
+
+				
+				
+				System.out.println(headers[i].getName()+"  "+headers[i].getValue());
+
+				i++;
+				
+			}
+			
+			
+
+			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+
+				result = EntityUtils.toString(response.getEntity());
+				
+				
+				
+				System.out.println(result);
+
+
+			}
+		}
+
+		httpClient.close();
+
+		
+	}
+	
+	
+	
+	private static void postScore()throws Exception{
+		
+		
+
 		String encoding="utf-8";
 		
 		String url = "http://portal.dlut.edu.cn/report/Report-ResultAction.do?newReport=true";
@@ -428,7 +591,7 @@ public class TestMain {
 		httpPost.setHeader("Connection", "keep-alive");
 		//httpPost.setHeader("Content-Length", "106");
 		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-		httpPost.setHeader("Cookie", "JSESSIONID=80ecc1f9bff2f0d51a20a6728396; JSESSIONID=80e44f53fd0fd87e35e845a9995d");
+		httpPost.setHeader("Cookie", "JSESSIONID=406b114c4cc7fa126ec3fecf6790; JSESSIONID=4014ed70e2b9ef0c4f0eca5e0770");
 		httpPost.setHeader("Host", "portal.dlut.edu.cn");
 		httpPost.setHeader("Origin", "http://portal.dlut.edu.cn");
 		httpPost.setHeader("Referer", "http://portal.dlut.edu.cn/report/Report-EntryAction.do?reportId=439cf471-c69b-4577-9fe2-5e2fca96d1e0&ctype=1");
@@ -467,7 +630,7 @@ public class TestMain {
 		// ÊÍ·ÅÁ´½Ó
 		response.close();
 		
-		//return body;
+		
 	}
-
+	
 }

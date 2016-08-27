@@ -12,35 +12,34 @@ import java.net.URL;
 import java.util.Map;
 import java.util.Map.Entry;
 
+
 public class MyHttpClient {
 
-	
-	public static String sendGet(String url,Map<?,?> map) {
+	public static String sendGet(String url, Map<?, ?> map) {
 
-		if(map==null||map.size()==0){
-			
+		if (map == null || map.size() == 0) {
+
 			return sendGet(url);
-			
-		}else{
-			
+
+		} else {
+
 			StringBuilder sb = new StringBuilder();
 			sb.append(url);
 			sb.append("?");
-			
-			
-			for (Entry<?, ?> entry : map.entrySet()) {  
-				
+
+			for (Entry<?, ?> entry : map.entrySet()) {
+
 				sb.append(entry.getKey().toString());
 				sb.append("=");
 				sb.append(entry.getValue().toString());
 				sb.append("&");
 
-			} 
-			
-			int len=sb.toString().length();
-			
-			return sendGet(sb.toString().substring(0, len-1));
-			
+			}
+
+			int len = sb.toString().length();
+
+			return sendGet(sb.toString().substring(0, len - 1));
+
 		}
 
 	}
@@ -82,8 +81,7 @@ public class MyHttpClient {
 		}
 		return l;
 	}
-	
-	
+
 	public static void sendJSONPost(String urlPath, String jsonStr) throws Exception {
 
 		byte[] entitydata = jsonStr.getBytes();
@@ -118,12 +116,12 @@ public class MyHttpClient {
 
 	}
 
-	public static void postFileNoTitle(String urlPath, String filePath) {
+	public static void postFileNoTitle(String urlPath, String filePath,String fileName) {
 
 		try {
 
 			String boundary = "Boundary-b1ed-4060-99b9-fca7ff59c113";
-			// String Enter = "\r\n";
+			String Enter = "\r\n";
 
 			// URL url = new
 			// URL("http://localhost:8080/empforecast/api/rest/score/uploadfile");
@@ -141,15 +139,8 @@ public class MyHttpClient {
 
 			DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
 
-			// String part =Enter + "--" + boundary + Enter
-			// + "Content-Type:application/octet-stream" + Enter
-			// + "Content-Disposition: form-data; name=\"file\"" + Enter +
-			// Enter;
-
-			// String part1 = Enter + "--" + boundary + Enter
-			// + "Content-Type: application/octet-stream" + Enter
-			// + "Content-Disposition: form-data; filename=\"as.txt\";
-			// name=\"file\"" + Enter + Enter;
+			String part1 = Enter + "--" + boundary + Enter + "Content-Type: application/octet-stream" + Enter
+					+ "Content-Disposition: form-data; filename=\""+fileName+"\";name=\"file\"" + Enter + Enter;
 
 			// part 2
 			// String part2 = Enter + "--" + boundary + Enter + "Content-Type:
@@ -163,7 +154,7 @@ public class MyHttpClient {
 			byte[] xmlBytes = new byte[fis.available()];
 			fis.read(xmlBytes);
 
-			// dos.writeBytes(part1);
+			dos.writeBytes(part1);
 			dos.write(xmlBytes);
 
 			dos.flush();
